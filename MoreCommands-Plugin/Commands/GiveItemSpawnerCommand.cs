@@ -1,6 +1,7 @@
 ﻿using FacilityManager;
 using FacilityManager.Behaviours;
 using FacilityManager.Server;
+using MoreCommands_Plugin.Items;
 
 namespace MoreCommands_Plugin.Commands
 {
@@ -17,21 +18,19 @@ namespace MoreCommands_Plugin.Commands
             }
 
             Player player = Context.PlayerSpawner.GetPlayer(commandContext.Sender);
-            if (player.TryGetComponent(out HumanPlayer humanPlayer))
+            if (!player.TryGetComponent(out HumanPlayer humanPlayer))
             {
-                if (humanPlayer.Inventory.HasFreeSpace == false)
-                    commandContext.ResponseError("You don't have free space in inventory.\n");
-
-                ItemData itemData = new ItemData();
-                itemData.SetInt("item_to_spawn", itemId);
-
-                humanPlayer.Inventory.AddItem(Context.ItemRegistry.GetItemInfo(2), itemData);
-                commandContext.Response("Item spawner was added to your inventory.\n");
-
-                return;
+                commandContext.ResponseError("Your player object doesn't have inventory.\n");
             }
 
-            commandContext.ResponseError("Your player object doesn't have inventory.\n");
+            if (!humanPlayer.Inventory.HasFreeSpace)
+                commandContext.ResponseError("You don't have free space in inventory.\n");
+
+            var metadata = new ModifiedKeycardMetadata();
+            metadata.ItemToSpawn = itemId;
+
+            humanPlayer.Inventory.AddItem(Context.ItemRegistry.GetItemInfo(2), metadata);
+            commandContext.Response("Item spawner was added to your inventory.\n");
         }
     }
 }

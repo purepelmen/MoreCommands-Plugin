@@ -55,8 +55,6 @@
     <Compile Include="Commands\CloseDoorsCommand.cs" />
     <Compile Include="Commands\GiveItemSpawnerCommand.cs" />
     <Compile Include="Commands\OpenDoorsCommand.cs" />
-    <Compile Include="Commands\SetLightColorCommand.cs" />
-    <Compile Include="Commands\SpawnItemCommand.cs" />
     <Compile Include="Items\ModifiedKeycard.cs" />
     <Compile Include="MoreCommandsPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

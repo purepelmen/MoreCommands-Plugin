@@ -20,18 +20,16 @@ namespace MoreCommands_Plugin
 
         public override void Initialize(GameContext context)
         {
-            var commandRegistry = context.GetController<CommandRegistry>();
+            var commandRegistry = context.Get<CommandRegistry>();
 
             commandRegistry.Register("addspeed", new AddSpeedCommand());
             commandRegistry.Register("addjump", new AddJumpHeightCommand());
             commandRegistry.Register("opendoors", new OpenDoorsCommand());
             commandRegistry.Register("closedoors", new CloseDoorsCommand());
             commandRegistry.Register("itemspawner", new GiveItemSpawnerCommand());
-            commandRegistry.Register("spawnitem", new SpawnItemCommand());
-            commandRegistry.Register("lightcolor", new SetLightColorCommand());
 
-            var itemRegistry = context.GetController<ItemRegistry>();
-            itemRegistry.RegisterItem(2, new ModifiedKeycard(2));
+            var itemRegistry = context.Get<ItemRegistry>();
+            itemRegistry.RegisterItem(2, new ModifiedKeycard(1));
         }
     }
 }
